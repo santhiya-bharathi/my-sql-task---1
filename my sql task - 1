@@ -1,87 +1,48 @@
-1.	Find all the information about each products
-     db.collection.find({})
-2.	Find the product price which are between 400 to 800
-    db.collection.find({
-  "$and": [
-    {
-      "product_price": {
-        "$gt": 400
-      }
-    },
-    {
-      "product_price": {
-        "$lt": 800
-      }
-    }
-  ]
-})    
-  
-3.	Find the product price which are not between 400 to 600
+data base (my sql task - 1)
 
-db.collection.find({
-  "$or": [
-    {
-      "product_price": {
-        "$lt": 400
-      }
-    },
-    {
-      "product_price": {
-        "$gt": 600
-      }
-    }
-  ]
-})
+1. Create tables for the above list given
 
-4.	List the four product which are greater than 500 in price
-db.collection.find({
-  product_price: {
-    "$gt": 500
-  }
-})
-5.	Find the product name and product material of each products
+Answer: CREATE TABLE students (
+Users TEXT,
+Codekata TEXT,
+Attendance NUMBER,
+Topics TEXT,
+Tasks TEXT,
+company_drives NUMBER,
+Mentors TEXT,
+students_activated_courses NUMBER,
+Courses TEXT
+);
 
-db.collection.find({},
-{
-  product_name: 1,
-  product_material: 1
-})
+2. insert at least 5 rows of values in each table
 
-6.	Find the product with a row id of 10
-db.collection.find({
-  "id": {
-    "$eq": "10"
-  }
-})
+Answer: INSERT INTO students
+VALUES (liam, array problems, 70%, react, crudtask, 3, siva, 1, fullstack),
+(noah, number problems, 75%, html, htmltask, 4, abi, 1, web develope),
+ (ava, array  problems, 78%, react, crudtask, 5, mansi, 1, gaming),
+(charlotte, number problems, 76%, html, htmltask, 5, siva, 1, fullstack),
+(olivia, problems, 72%, html, htmltask, 3, siva , 1, fullstack);
 
-7.	Find only the product name and product material
-db.collection.find({},
-{
-  _id: 0,
-  product_name: 1,
-  product_material: 1
-})
-8.	Find all products which contain the value of soft in product material
+3. get number problems solved in codekata by combining the users
 
-db.collection.find({
-  product_material: {
-    "$eq": "Soft"
-  }
-})
+Answer: Select users from students where codekata = “number problems”;
 
-9.	Find products which contain product color indigo  and product price 492.00
 
-db.collection.find({
-  "$or": [
-    {
-      "product_color": "indigo"
-    },
-    {
-      "product_price": 492.00
-    }
-  ]
-})
+4. display the no of company drives attended by a user
 
-10.	Delete the products which product price value are same
-     
-db.collection.deleteOne({})
+Answer: Select users , company_drives ,count(*) as company-drives from students group by company_drives
+
+
+5. combine and display students_activated_courses and courses for a specific user groping them based on the course
+
+Answer: Select users, students_activated_courses, course from students group by course
+
+
+6. list all the mentors
+
+Answer: Select Mentors from students
+
+
+7. list the number of students that are assigned for a mentor
+
+Answer:  Select users, COUNT(*) as no of students from students group by mentors
